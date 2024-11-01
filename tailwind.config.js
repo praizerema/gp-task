@@ -2,7 +2,15 @@
 export default {
   content: ["./src/**/*.{html,js,ts,jsx,tsx,mdx}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      Satoshi: ["Satoshi", "sans-serif"],
+      GeneralSans: ["General Sans", "sans-serif"],
+
+    },
+    extend: {
+      backgroundImage: {
+        "home": "url('/images/page-bg-4.png')"}
+    },
   },
   plugins: [],
 }

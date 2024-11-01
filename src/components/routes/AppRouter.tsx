@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import PrivateRoutes from "./ProtectedRoute";
+import Home from "../../pages/home/Dashboard";
 import Login from "../../pages/auth/login";
 import Reigister from "../../pages/auth/register";
-import PrivateRoutes from "./ProtectedRoute";
 
 const AppRouter: React.FC = () => {
   return (
@@ -10,7 +12,7 @@ const AppRouter: React.FC = () => {
       <Routes>
         {/* Authenticated Routes */}
         <Route element={<PrivateRoutes />}>
-          {/* <Route path="/" element={<Dashboard />} /> */}
+          <Route path="/" element={<Home/>} />
         </Route>
 
         <Route path="/login" element={<Login />} />

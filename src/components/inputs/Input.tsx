@@ -15,7 +15,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       prefix,
       errorMessage,
       type = "text",
-      labelClass = "bg-[#F5FAF4]",
+      labelClass = "bg-[#ffffff]",
       ...rest
     },
     ref

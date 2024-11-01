@@ -2,4 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Satoshi";
+  src: url("./assets/fonts/Satoshi/Fonts/TTF/Satoshi-Variable.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("./assets/fonts/GeneralSans/Fonts/TTF/GeneralSans-Variable.ttf")
+    format("truetype");
+}
 
+.auth-card{
+@apply lg:w-1/3 bg-white p-10 rounded-3xl border;
+}
+
+.h1{
+@apply text-3xl font-bold font-GeneralSans
+}
+
+.pbody-12{
+  @apply leading-[1rem] text-xs font-Satoshi font-medium;
+}

@@ -1,4 +1,5 @@
 import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /**This is used to forcefully clear a users data from session and local storage and optionally push them to the login screen */
 export const _clearData = ( {pushToLogin = true} ) => {

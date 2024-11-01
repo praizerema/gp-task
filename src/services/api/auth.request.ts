@@ -4,7 +4,7 @@ import { apiService } from "../index";
 export const LoginUserApi = async (data: object) => {
 	const payload = { ...data };
 	const response = await apiService.post({
-		url: "/auth/signin",
+		url: "/auth/login",
 		payload,
 	});
 	return response;
@@ -20,21 +20,4 @@ export const CreateUserApi = async (data: object) => {
 };
 
 
-/** Reset Password. The React-Query key is "ResetUserPasswordApi" */
-export const ResetUserPasswordApi = async (data: object) => {
-	const payload = { ...data };
-	const response = await apiService.post({
-		url: "auth/password-reset",
-		payload,
-	});
-	return response;
-};
 
-export const RefreshTokenApi = async (data: object) =>{
-	const payload = {...data}
-	const response = await apiService.post({
-		url: "/auth/refresh",
-		payload,
-	});
-	return response;
-}

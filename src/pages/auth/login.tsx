@@ -1,91 +1,78 @@
-import { Button, Input, Layout, logInSchema } from "../../components"
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Input, Layout, logInSchema } from "../../components";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { MailIcon, PassLockIcon } from "../../assets";
 import { LoginUserApi } from "../../services";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../../context";
+import { Link, useNavigate } from "react-router-dom";
 
- const Login = () =>{
-    const navigate = useNavigate();
-    const {setUser} = useAuthContext()
-const [isLoading, setIsLoading] = useState<boolean>(false)
+const Login = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({ resolver: zodResolver(logInSchema) });
-    
-      const onSubmit = async(data: object) => {
-        console.log(data);
-        setIsLoading(true)
-        try{
-           const response = await LoginUserApi({...data})
-           alert("success")
-           if (typeof response === "object") {
-           const userResponse = response as unknown as {
-            token: string
-           }
-        globalThis.localStorage.setItem("token",  userResponse.token);
-        navigate('/')
-           }
-           setIsLoading(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(logInSchema) });
 
-        }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    catch(error){
-console.log(error)
-setIsLoading(false)
-
-// showToast(error, "error");
-
+  const onSubmit = async (data: object) => {
+    setIsLoading(true);
+    try {
+      const response = await LoginUserApi({ ...data });
+      alert("success");
+      if (typeof response === "object") {
+        const userResponse = response as unknown as {
+          token: string;
+        };
+        globalThis.localStorage.setItem("token", userResponse.token);
+        navigate("/");
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
     }
-      };
-    
-return (
+  };
+
+  return (
     <Layout>
-        <div className="flex justify-center items-center h-[42rem]">
-     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 auth-card">
-     <h1 className="h1 pb-5">Login</h1>
+      <div className="flex justify-center items-center h-[42rem]">
+        <form onSubmit={handleSubmit(onSubmit)} className="auth-card">
+          <h1 className="h1 pb-7 text-gp-purple-500">Log In</h1>
+          <div className="space-y-6">
+            <Input
+              label="Email Address"
+             placeholder="e.g John419@gmail.com"
+              {...register("email")}
+              prefix={<MailIcon />}
+              errorMessage={errors.email?.message as string} 
+            />
 
-          <Input
-            label="Email Address"
-            placeholder="e.g John419@gmail.com"
-            {...register("email")}
-            prefix={<MailIcon />}
-            errorMessage={errors.email?.message as string}
-          />
-
-          <Input
-            label="Password"
-            placeholder="************"
-            type="password"
-            {...register("password")}
-            prefix={<PassLockIcon />}
-            errorMessage={errors.password?.message as string}
-          />
-          {/* <div className="flex items-center justify-between">
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                //   {...register("remember_me")}
-                className="form-checkbox"
-              />
-              <span className="ml-2">Please Remember me</span>
-            </label>
-
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div> */}
+            <Input
+              label="Password"
+              placeholder="************"
+              type="password"
+              {...register("password")}
+              prefix={<PassLockIcon />}
+              errorMessage={errors.password?.message as string}
+            />
+          </div>
+          <p className="my-2 pbody-12">
+            Don't have an account yet?{" "}
+            <Link to="/register" className="text-gp-purple-500">
+              Register
+            </Link>
+          </p>
           <Button
             text={"Log In"}
-            className="btn float-right rounded-2xl "
+            className="btn-gp float-right mt-6"
             type="submit"
+            loading={isLoading}
           />
         </form>
-        </div>
+      </div>
     </Layout>
-)
-}
-export default Login
+  );
+};
+export default Login;

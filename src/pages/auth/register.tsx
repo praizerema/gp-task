@@ -1,76 +1,93 @@
-import { Button, Input, Layout, registerSchema } from "../../components"
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { Button, Input, Layout, registerSchema } from "../../components";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { MailIcon, PassLockIcon } from "../../assets";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { CreateUserApi } from "../../services";
 
-const Reigister = () =>{
+const Reigister = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-      } = useForm({ resolver: zodResolver(registerSchema) });
-    
-      const onSubmit = (data: object) => {
-        console.log(data);
-      };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(registerSchema) });
 
-    return (
-        <Layout>
-        <div className="flex justify-center items-center h-[42rem]">
-     <form onSubmit={handleSubmit(onSubmit)}className="space-y-6 auth-card">
-     <h1 className="h1 pb-5">Register</h1>
-     <Input
-            label="Username"
-            placeholder="e.g John41@gmail.com"
-            {...register("email")}
-            prefix={<MailIcon />}
-            errorMessage={errors.email?.message as string}
-          />
-          <Input
-            label="Email Address"
-            placeholder="e.g John419@gmail.com"
-            {...register("email")}
-            prefix={<MailIcon />}
-            errorMessage={errors.email?.message as string}
-          />
-
-          <Input
-            label="Password"
-            placeholder="************"
-            type="password"
-            {...register("password")}
-            prefix={<PassLockIcon />}
-            errorMessage={errors.password?.message as string}
-          />
+  const onSubmit = async (data: object) => {
+    alert("clicked")
+    setIsLoading(true);
+    try {
+      const response = await CreateUserApi({ ...data });
+      alert("success");
+      if (typeof response === "object") {
+        const userResponse = response as unknown as {
+          token: string;
+        };
+        globalThis.localStorage.setItem("token", userResponse.token);
+        navigate("/login");
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+  return (
+    <Layout>
+      <div className="flex justify-center items-center h-[42rem]">
+        <form onSubmit={handleSubmit(onSubmit)} className="auth-card">
+          <h1 className="h1 pb-7 text-gp-purple-500">Register</h1>
+          <div className="space-y-6">
             <Input
-            label="Confirm Password"
-            placeholder="************"
-            type="password"
-            {...register("confirm_password")}
-            prefix={<PassLockIcon />}
-            errorMessage={errors.confirm_password?.message as string}
-          />
-          {/* <div className="flex items-center justify-between">
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                //   {...register("remember_me")}
-                className="form-checkbox"
-              />
-              <span className="ml-2">Please Remember me</span>
-            </label>
+              label="Username"
+              placeholder="e.g ayo"
+              {...register("username")}
+              prefix={<MailIcon />}
+              errorMessage={errors.username?.message as string}
+            />
+            <Input
+              label="Email Address"
+              placeholder="e.g John419@gmail.com"
+              {...register("email")}
+              prefix={<MailIcon />}
+              errorMessage={errors.email?.message as string}
+            />
 
-            <Link to="/forgot-password">Forgot Password?</Link>
-          </div> */}
+            <Input
+              label="Password"
+              placeholder="************"
+              type="password"
+              {...register("password")}
+              prefix={<PassLockIcon />}
+              errorMessage={errors.password?.message as string}
+            />
+            <Input
+              label="Confirm Password"
+              placeholder="************"
+              type="password"
+              {...register("confirm_password")}
+              prefix={<PassLockIcon />}
+              errorMessage={errors.confirm_password?.message as string}
+            />
+          </div>
+          <div className="my-2 pbody-12">
+            Already have an account?{" "}
+            <Link to="/login" className="text-gp-purple-500">
+              Log In{" "}
+            </Link>
+          </div>
           <Button
-            text={"Log In"}
-            className="btn float-right rounded-2xl "
+            text={"Register"}
+            className="btn-gp float-right"
             type="submit"
+            loading={isLoading}
           />
         </form>
-        </div>
+      </div>
     </Layout>
-    )
-    }
-    export default Reigister
+  );
+};
+export default Reigister;

@@ -80,3 +80,13 @@ export const showToast = (message: string, type: string) => {
   }
 };
 
+export const formatDate = (timestamp: string): string => {
+  const dateObj = new Date(timestamp);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  return dateObj.toLocaleString("en-US", options);
+};
+

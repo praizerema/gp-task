@@ -25,14 +25,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <label
           htmlFor={name}
           className={
-            "absolute -top-3 left-5 pbody-12 text-eaa-gray-100 px-2 rounded-[2rem] py-1 " +
+            "absolute -top-3 left-5 pbody-12 px-2 rounded-[2rem] py-1 " +
             labelClass
           }
         >
           {label}
         </label>
         <div
-          className={`flex flex-row items-center border border-[#C0C0C080] rounded-2xl h-[4rem] px-3 gap-x-3 ${
+          className={`flex flex-row items-center border border-[#C0C0C080] rounded-2xl h-[3.5rem] px-3 gap-x-3 ${
             errorMessage?.length ? "border-1 border-red-600" : ""
           }`}
         >
@@ -43,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             name={name}
             ref={ref}
             type={type}
-            className={`border-none focus:outline-none py-4 w-full placeholder:text-eaa-gray-300 text-eaa-gray-500 h-full bg-transparent focus:bg-transparent`}
+            className={`border-none focus:outline-none w-full placeholder:text-gray-300 text-gray-500 h-full bg-transparent focus:bg-transparent`}
           />
         </div>
         {errorMessage?.length ? (

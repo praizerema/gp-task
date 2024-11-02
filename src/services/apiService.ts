@@ -65,7 +65,7 @@ const apiResource = () => {
       try {
         const data = service.get(url);
         const exactData = await Promise.resolve(data);
-        return exactData.data;
+        return exactData;
       } catch (error) {
         return Promise.reject(error);
       }

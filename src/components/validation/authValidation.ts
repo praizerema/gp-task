@@ -17,9 +17,9 @@ export const logInSchema = z.object({
 
 export const registerSchema = z.object({
     email: z.string().email('Invalid email address'),
-    username: z.string().email('Invalid email address'),
+    username: z.string().min(3, 'Enter at least 3 characters'),
     password: passwordVal,
-    confirm_password: z.string()
+    confirm_password: z.string(),
 }).refine((data) => data.password === data.confirm_password, {
     message: "Passwords don't match",
     path: ['confirmPassword']

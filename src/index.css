@@ -13,14 +13,21 @@
     format("truetype");
 }
 
-.auth-card{
-@apply lg:w-1/3 bg-white p-10 rounded-3xl border;
+.auth-card {
+@apply lg:w-1/3 p-10 rounded-3xl border bg-white;
 }
 
 .h1{
-@apply text-3xl font-bold font-GeneralSans
+@apply text-3xl font-bold font-GeneralSans;
 }
 
 .pbody-12{
   @apply leading-[1rem] text-xs font-Satoshi font-medium;
+}
+.btn-gp{
+@apply bg-gp-purple-500 text-white px-6 h-[3.5rem] rounded-2xl border-gp-purple-100;
+}
+
+.transition-event {
+  @apply transition duration-200 delay-200 ease-in-out;
 }

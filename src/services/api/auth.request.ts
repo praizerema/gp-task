@@ -13,7 +13,7 @@ export const LoginUserApi = async (data: object) => {
 export const CreateUserApi = async (data: object) => {
 	const payload = { ...data };
 	const response = await apiService.post({
-		url: "/auth/signup",
+		url: "/auth/register",
 		payload,
 	});
 	return response;

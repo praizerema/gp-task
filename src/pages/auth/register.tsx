@@ -1,4 +1,4 @@
-import { Button, Input, Layout, registerSchema } from "../../components";
+import { Button, Input, Layout, Modal, registerSchema } from "../../components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MailIcon, PassLockIcon } from "../../assets";
@@ -8,6 +8,8 @@ import { CreateUserApi } from "../../services";
 
 const Reigister = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(true);
+
   const navigate = useNavigate();
 
   const {
@@ -87,6 +89,15 @@ const Reigister = () => {
           />
         </form>
       </div>
+      <Modal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+      >
+       <div className="h1 text-center text-green-500">
+        Accound Registered Successfully
+        </div>
+       <div className="text-center py-2"><Link to="/login" className="text-gp-purple-500">Proceed to Log In</Link></div>
+      </Modal>
     </Layout>
   );
 };

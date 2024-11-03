@@ -25,7 +25,7 @@
   @apply leading-[1rem] text-xs font-Satoshi font-medium;
 }
 .btn-gp{
-@apply bg-gp-purple-500 text-white px-6 h-[3.5rem] rounded-2xl border-gp-purple-100;
+@apply bg-gp-purple-500 text-white px-6 h-[3.5rem] rounded-2xl border-gp-purple-100 disabled:bg-gray-200;
 }
 
 .transition-event {

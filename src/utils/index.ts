@@ -90,3 +90,13 @@ export const formatDate = (timestamp: string): string => {
   return dateObj.toLocaleString("en-US", options);
 };
 
+export const _copyToClipboard = async (str: string, message?: string): Promise<void> => {
+  try {
+    await navigator.clipboard.writeText(str);
+    showToast(message || "Copied", "info");
+  } catch (error) {
+    console.error("Failed to copy text: ", error);
+    showToast("Failed to copy text", "error");
+  }
+};
+

@@ -1,5 +1,4 @@
 import { FC, useState } from "react";
-import { TitleObjType } from "../../vite-env";
 import { _copyToClipboard, formatDate } from "../../utils";
 import { useSDK } from "@metamask/sdk-react";
 import { DeleteTitle } from "../../services";

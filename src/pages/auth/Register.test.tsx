@@ -3,7 +3,6 @@ import { MemoryRouter } from "react-router-dom";
 import { vi } from "vitest";
 import Register from "./Register";
 import { CreateUserApi } from "../../services";
-import { UserObject } from "../../vite-env";
 
 // Mock the services and react-router-dom
 vi.mock("../../services", () => ({
@@ -64,9 +63,9 @@ describe("Register Component", () => {
 
   it("submits the form with valid data", async () => {
     vi.mocked(CreateUserApi).mockResolvedValue({
-      username: "praizt",
-      email: "eremyya@gmail.com",
-      password: "$2a$08$5tiKFkkKyGzMJXRC444g6.dTsM/ABskwXVxK7gEs.R2iSGMD/Hzk2",
+      username: "testuser",
+      email: "test@example.com",
+      password: "Password@123",
       updatedAt: "2024-11-03T23:18:37.587Z",
       createdAt: "2024-11-03T23:18:37.587Z",
       deletedAt: null,
@@ -128,29 +127,4 @@ describe("Register Component", () => {
 
     consoleSpy.mockRestore();
   });
-
-  //   it('shows success modal after successful registration', async () => {
-  //     vi.mocked(CreateUserApi).mockResolvedValue({
-  //         "username": "praizt",
-  //         "email": "eremyya@gmail.com",
-  //         "password": "$2a$08$5tiKFkkKyGzMJXRC444g6.dTsM/ABskwXVxK7gEs.R2iSGMD/Hzk2",
-  //         "updatedAt": "2024-11-03T23:18:37.587Z",
-  //         "createdAt": "2024-11-03T23:18:37.587Z",
-  //         "deletedAt": null,
-  //         "uuid": "70a375f0-2791-4fe0-8ae8-4d4285e39976"
-  //     } as UserObject);
-  //     renderRegister();
-
-  //     fireEvent.change(screen.getByLabelText('Username'), { target: { value: 'testuser' } });
-  //     fireEvent.change(screen.getByLabelText('Email Address'), { target: { value: 'test@example.com' } });
-  //     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Password@123' } });
-  //     fireEvent.change(screen.getByLabelText('Confirm Password'), { target: { value: 'Password@123' } });
-
-  //     fireEvent.click(screen.getByRole('button', { name: 'Register' }));
-
-  //     await waitFor(() => {
-  //       expect(screen.getByText('Accound Registered Successfully')).toBeInTheDocument();
-  //       expect(screen.getByText('Proceed to Log In')).toBeInTheDocument();
-  //     });
-  //   });
 });

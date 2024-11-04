@@ -1,4 +1,3 @@
-import { UserObject } from "../../vite-env";
 import { apiService } from "../index";
 
 /** Login User. The React-Query key is "LoginUserApi" */

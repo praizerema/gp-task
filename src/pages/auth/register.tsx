@@ -19,11 +19,9 @@ const Reigister = () => {
   } = useForm({ resolver: zodResolver(registerSchema) });
 
   const onSubmit = async (data: object) => {
-    alert("clicked");
     setIsLoading(true);
     try {
       const response = await CreateUserApi({ ...data });
-      alert("success");
       if (typeof response === "object") {
         const userResponse = response as unknown as {
           token: string;
@@ -95,7 +93,7 @@ const Reigister = () => {
         onClose={() => setShowSuccessModal(false)}
       >
         <div className="h1 text-center text-green-500">
-          Accound Registered Successfully
+          Account Registered Successfully
         </div>
         <div className="text-center py-2">
           <Link to="/login" className="text-gp-purple-500">

@@ -5,7 +5,6 @@ import { CreateTitle, GetAllTitles } from "../../services";
 import { useSDK } from "@metamask/sdk-react";
 import { AxiosResponse } from "axios";
 import { MemoryRouter } from "react-router-dom";
-import { TitleObjType } from "../../vite-env";
 
 // Mock the services
 vi.mock("../../services", () => ({

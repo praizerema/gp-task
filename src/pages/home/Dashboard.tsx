@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { addTitleSchema, Button, Input, Layout, Modal } from "../../components";
 import { CreateTitle, GetAllTitles } from "../../services";
-import { TitleObjType } from "../../vite-env";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingTitleList, TitleList } from "./TitleList";

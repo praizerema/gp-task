@@ -1,4 +1,3 @@
-import { TitleObjType } from "../../vite-env";
 import { apiService } from "../apiService";
 
 export const GetAllTitles = async () => {

@@ -90,19 +90,19 @@ Request: { email, password }
 Response: { token }
 ```
 
-**Get All Titles** - GET /titles
+**Get All Titles** - GET /title
 ```bash
 Headers: Authorization: Bearer <token>
 Response: [ { id, title, user } ]
 ```
-**Create Title** - POST /titles
+**Create Title** - POST /title
 ```bash
 Headers: Authorization: Bearer <token>
 Request: { title }
 Response: { message, title }
 ```
 
-**Delete Title** - DELETE /api/titles/:id
+**Delete Title** - DELETE /title
 ```bash
 Headers: Authorization: Bearer <token>
 Response: { message }

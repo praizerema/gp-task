@@ -1,3 +1,4 @@
+import { UserObject } from "../../vite-env";
 import { apiService } from "../index";
 
 /** Login User. The React-Query key is "LoginUserApi" */
@@ -7,7 +8,7 @@ export const LoginUserApi = async (data: object) => {
 		url: "/auth/login",
 		payload,
 	});
-	return response;
+	return response as unknown as {token: string};
 };
 
 export const CreateUserApi = async (data: object) => {
@@ -16,7 +17,7 @@ export const CreateUserApi = async (data: object) => {
 		url: "/auth/register",
 		payload,
 	});
-	return response;
+	return response as unknown as UserObject;
 };
 
 

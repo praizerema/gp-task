@@ -8,7 +8,7 @@ import { CreateUserApi } from "../../services";
 
 const Reigister = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(true);
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Reigister = () => {
   } = useForm({ resolver: zodResolver(registerSchema) });
 
   const onSubmit = async (data: object) => {
-    alert("clicked")
+    alert("clicked");
     setIsLoading(true);
     try {
       const response = await CreateUserApi({ ...data });
@@ -39,7 +39,7 @@ const Reigister = () => {
   };
   return (
     <Layout>
-      <div className="flex justify-center items-center h-[42rem]">
+      <div className="flex justify-center items-center h-[42rem] px-5">
         <form onSubmit={handleSubmit(onSubmit)} className="auth-card">
           <h1 className="h1 pb-7 text-gp-purple-500">Register</h1>
           <div className="space-y-6">
@@ -78,7 +78,7 @@ const Reigister = () => {
           <div className="my-2 pbody-12">
             Already have an account?{" "}
             <Link to="/login" className="text-gp-purple-500">
-              Log In{" "}
+              Log In
             </Link>
           </div>
           <Button
@@ -86,6 +86,7 @@ const Reigister = () => {
             className="btn-gp float-right"
             type="submit"
             loading={isLoading}
+            disabled={isLoading}
           />
         </form>
       </div>
@@ -93,10 +94,14 @@ const Reigister = () => {
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
       >
-       <div className="h1 text-center text-green-500">
-        Accound Registered Successfully
+        <div className="h1 text-center text-green-500">
+          Accound Registered Successfully
         </div>
-       <div className="text-center py-2"><Link to="/login" className="text-gp-purple-500">Proceed to Log In</Link></div>
+        <div className="text-center py-2">
+          <Link to="/login" className="text-gp-purple-500">
+            Proceed to Log In
+          </Link>
+        </div>
       </Modal>
     </Layout>
   );

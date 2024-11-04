@@ -28,6 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             "absolute -top-3 left-5 pbody-12 px-2 rounded-[2rem] py-1 " +
             labelClass
           }
+          aria-labelledby={name}
         >
           {label}
         </label>
@@ -41,6 +42,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <input
             {...rest}
             name={name}
+            id={name}
             ref={ref}
             type={type}
             className={`border-none focus:outline-none w-full placeholder:text-gray-300 text-gray-500 h-full bg-transparent focus:bg-transparent`}

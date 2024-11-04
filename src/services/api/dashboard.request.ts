@@ -1,9 +1,10 @@
+import { TitleObjType } from "../../vite-env";
 import { apiService } from "../apiService";
 
 export const GetAllTitles = async () => {
 	const response = await apiService.get(`/title`);
 	console.log(response);
-	return response;
+	return response as unknown as TitleObjType[];
   };
   export const CreateTitle = async (data: object) => {
 	const payload = { ...data };

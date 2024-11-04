@@ -14,10 +14,9 @@ export const _clearData = ( {pushToLogin = true} ) => {
 };
 
 export const _getToken = () => {
-  const token = globalThis?.localStorage?.getItem("token");
-  const refreshToken = globalThis?.localStorage?.getItem("refresh_token");
+  const token = globalThis.localStorage?.getItem("token");
 
-  if (!token && !refreshToken) return false;
+  if (!token) return false;
 
   return token;
 };

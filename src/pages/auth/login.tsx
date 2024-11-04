@@ -20,7 +20,6 @@ const Login = () => {
     setIsLoading(true);
     try {
       const response = await LoginUserApi({ ...data });
-      alert("success");
       if (typeof response === "object") {
         const userResponse = response as unknown as {
           token: string;
@@ -28,25 +27,25 @@ const Login = () => {
         globalThis.localStorage.setItem("token", userResponse.token);
         navigate("/");
       }
-      setIsLoading(false);
     } catch (error) {
       console.error(error);
+    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <Layout>
-      <div className="flex justify-center items-center h-[42rem]">
+      <div className="flex justify-center items-center h-[42rem] px-5">
         <form onSubmit={handleSubmit(onSubmit)} className="auth-card">
           <h1 className="h1 pb-7 text-gp-purple-500">Log In</h1>
           <div className="space-y-6">
             <Input
               label="Email Address"
-             placeholder="e.g John419@gmail.com"
+              placeholder="e.g John419@gmail.com"
               {...register("email")}
               prefix={<MailIcon />}
-              errorMessage={errors.email?.message as string} 
+              errorMessage={errors.email?.message as string}
             />
 
             <Input
@@ -69,6 +68,7 @@ const Login = () => {
             className="btn-gp float-right mt-6"
             type="submit"
             loading={isLoading}
+            disabled={isLoading}
           />
         </form>
       </div>

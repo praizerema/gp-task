@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import PrivateRoutes from "./ProtectedRoute";
 import Home from "../../pages/home/Dashboard";
-import Login from "../../pages/auth/login";
-import Reigister from "../../pages/auth/register";
+import Login from "../../pages/auth/Login";
+import Reigister from "../../pages/auth/Register";
 
 const AppRouter: React.FC = () => {
   return (

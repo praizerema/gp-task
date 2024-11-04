@@ -1,10 +1,13 @@
 import { FC, useState } from "react";
 import { TitleObjType } from "../../vite-env";
 import { _copyToClipboard, formatDate } from "../../utils";
+import { useSDK } from "@metamask/sdk-react";
+import { DeleteTitle } from "../../services";
 
 export const TitleList: FC<{ titles: TitleObjType[] }> = ({ titles }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [dropedMenu, setDropedMenu] = useState<string>("");
+  const { connected } = useSDK();
 
   const ITEMS_PER_PAGE = 9;
 
@@ -22,7 +25,7 @@ export const TitleList: FC<{ titles: TitleObjType[] }> = ({ titles }) => {
   return (
     <>
       <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-7">
-        {currentTitles.length ?
+        {currentTitles.length ? (
           currentTitles.map((title: TitleObjType) => (
             <div
               className="py-5 px-3 border-t-2 border-l-2 shadow-md rounded-2xl border-[#A594F9] flex items-start justify-between relative"
@@ -40,7 +43,16 @@ export const TitleList: FC<{ titles: TitleObjType[] }> = ({ titles }) => {
               </span>
               {dropedMenu === title.uuid && (
                 <div className="bg-white/95 absolute right-2 p-2 pbody-12 top-10 border rounded-xl space-y-2">
-                  <div className="text-red-500 cursor-pointer">Delete</div>
+                  {connected ? (
+                    <div
+                      className="text-red-500 cursor-pointer"
+                      onClick={() => DeleteTitle({ uuid: title.uuid })}
+                    >
+                      Delete
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <div
                     className="cursor-pointer"
                     onClick={() => _copyToClipboard(title.title)}
@@ -50,7 +62,12 @@ export const TitleList: FC<{ titles: TitleObjType[] }> = ({ titles }) => {
                 </div>
               )}
             </div>
-          )) : <div className="h1 text-gray-700 col-span-12">No Titles Added Yet</div> }
+          ))
+        ) : (
+          <div className="h1 text-gray-700 col-span-12">
+            No Titles Added Yet
+          </div>
+        )}
       </div>
       <div className="flex justify-end mt-4 space-x-2">
         <button

@@ -99,7 +99,22 @@ Response: [ { id, title, user } ]
 ```bash
 Headers: Authorization: Bearer <token>
 Request: { title }
-Response: { message, title }
+Response: {
+    "title": "My title is here 6",
+    "userId": {
+        "createdAt": "2024-11-03T23:18:37.587Z",
+        "updatedAt": "2024-11-03T23:18:37.587Z",
+        "deletedAt": null,
+        "uuid": "70a375f0-2791-4fe0-8ae8-4d4285e39976",
+        "username": "praizt",
+        "email": "eremyya@gmail.com",
+        "password": "$2a$08$5tiKFkkKyGzMJXRC444g6.dTsM/ABskwXVxK7gEs.R2iSGMD/Hzk2"
+    },
+    "updatedAt": "2024-11-04T02:37:35.169Z",
+    "createdAt": "2024-11-04T02:37:35.169Z",
+    "deletedAt": null,
+    "uuid": "c0a20bd1-4be8-4f4d-94fb-2a45be37088a"
+}
 ```
 
 **Delete Title** - DELETE /title
